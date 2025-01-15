@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -24,7 +25,7 @@ public class PracticeFormTest {
         $(byText("Male")).click();
         $("#userNumber").setValue("7941643176");
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption(9);
+        $(".react-datepicker__month-select").selectOption("October");
         $(".react-datepicker__year-select").selectOption("1996");
         $("div[aria-label='Choose Thursday, October 3rd, 1996']").click();
         $("#subjectsInput").setValue("E");
@@ -41,5 +42,15 @@ public class PracticeFormTest {
         $(byText("Karnal")).click();
         $("#submit").click();
 
+        $(".table").$(byText("Student Name")).parent().shouldHave(text("Timur Vlasov"));
+        $(".table").$(byText("Student Email")).parent().shouldHave(text("test@email.com"));
+        $(".table").$(byText("Gender")).parent().shouldHave(text("Male"));
+        $(".table").$(byText("Mobile")).parent().shouldHave(text("7941643176"));
+        $(".table").$(byText("Date of Birth")).parent().shouldHave(text("03 October,1996"));
+        $(".table").$(byText("Subjects")).parent().shouldHave(text("English, Computer Science"));
+        $(".table").$(byText("Hobbies")).parent().shouldHave(text("Reading, Music"));
+        $(".table").$(byText("Picture")).parent().shouldHave(text("sample-pic.jpg"));
+        $(".table").$(byText("Address")).parent().shouldHave(text("г. Барнаул, ул. Гоголя, д. 38"));
+        $(".table").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
     }
 }
